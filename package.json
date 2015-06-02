@@ -1,6 +1,6 @@
 {
   "name": "angular-identicon",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "angular wrapper for github like identicons",
   "main": "gulpfile.js",
   "scripts": {

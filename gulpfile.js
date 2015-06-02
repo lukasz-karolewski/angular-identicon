@@ -75,6 +75,7 @@ gulp.task('create-new-tag', function (cb) {
 
 gulp.task('release', function (callback) {
     runSequence(
+        'default',
         'bump-patch-version',
         'commit-changes',
         'push-changes',
