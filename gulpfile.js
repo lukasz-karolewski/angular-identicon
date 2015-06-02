@@ -48,12 +48,15 @@ function inc(importance) {
         // save it back to filesystem
         .pipe(gulp.dest('./'))
         // commit the changed version number
-        .pipe(git.commit('bumps package version'))
+        .pipe(git.commit('publishing ' + importance))
 
         // read only one file to get the version number
         .pipe(filter('package.json'))
+
         // **tag it in the repository**
-        .pipe(tag_version());
+        .pipe(tag_version())
+        .pipe(git.push('origin', 'master'))
+        .pipe(git.push('origin', 'master', {args: " --tags"}));
 }
 
 gulp.task('patch', function () {
