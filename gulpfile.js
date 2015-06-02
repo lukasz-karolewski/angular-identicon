@@ -54,10 +54,13 @@ function inc(importance) {
         .pipe(filter('package.json'))
 
         // **tag it in the repository**
-        .pipe(tag_version())
-        .pipe(git.push('origin', 'master'))
-        .pipe(git.push('origin', 'master', {args: " --tags"}));
+        .pipe(tag_version());
 }
+
+gulp.task('push', function(){
+    //git.push('origin', 'master');
+    git.push('origin', 'master', {args: " --tags"});
+});
 
 gulp.task('patch', function () {
     return inc('patch');
