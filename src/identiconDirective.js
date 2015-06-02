@@ -7,7 +7,7 @@
  *
  * @restrict A
  * */
-angular.module('mtando.identicon')
+angular.module('ui.identicon')
     .directive('identicon', function () {
         return {
             restrict: 'E',

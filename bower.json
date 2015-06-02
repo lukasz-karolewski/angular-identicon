@@ -1,6 +1,6 @@
 {
   "name": "angular-identicon",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/kether667/angular-identicon",
   "authors": [
     "kether667 <lkarolewski@gmail.com>"
@@ -22,7 +22,6 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "gulpfile.js"
   ]
 }

@@ -1,7 +1,7 @@
-describe('Directive: mtando.identicon', function () {
+describe('Directive: ui.identicon', function () {
     var ele, scope;
 
-    beforeEach(module("mtando.identicon"));
+    beforeEach(module("ui.identicon"));
 
     beforeEach(inject(function ($compile, $rootScope) {
         scope = $rootScope.$new();
