@@ -6,9 +6,11 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     rename = require("gulp-rename"),
     git = require('gulp-git'),
-    bump = require('gulp-bump'),
     filter = require('gulp-filter'),
-    tag_version = require('gulp-tag-version');
+    runSequence = require('run-sequence'),
+    bump = require('gulp-bump'),
+    gutil = require('gulp-util'),
+    fs = require('fs');
 
 var paths = {
     src: ['src/*.js', '!**/*Spec.js'],
@@ -39,35 +41,50 @@ gulp.task('test', function () {
 
 gulp.task('default', ['build', 'test']);
 
+//------------ publishing
 
-function inc(importance) {
-    // get all the files to bump version in
-    return gulp.src(['./package.json', './bower.json'])
-        // bump the version number in those files
-        .pipe(bump({type: importance}))
-        // save it back to filesystem
-        .pipe(gulp.dest('./'))
-        // commit the changed version number
-        .pipe(git.commit('publishing ' + importance))
-
-        // read only one file to get the version number
-        .pipe(filter('package.json'))
-
-        // **tag it in the repository**
-        .pipe(tag_version());
-}
-
-gulp.task('push', function(){
-    //git.push('origin', 'master');
-    git.push('origin', 'master', {args: " --tags"});
+gulp.task('bump-patch-version', function () {
+    return gulp.src(['./bower.json', './package.json'])
+        .pipe(bump({type: "patch"}).on('error', gutil.log))
+        .pipe(gulp.dest('./'));
 });
 
-gulp.task('patch', function () {
-    return inc('patch');
+gulp.task('commit-changes', function () {
+    return gulp.src('.')
+        .pipe(git.commit('[Prerelease] Bumped version number', {args: '-a'}));
 });
-gulp.task('feature', function () {
-    return inc('minor');
+
+gulp.task('push-changes', function (cb) {
+    git.push('origin', 'master', cb);
 });
-gulp.task('release', function () {
-    return inc('major');
+
+gulp.task('create-new-tag', function (cb) {
+    var version = getPackageJsonVersion();
+    git.tag(version, 'Created Tag for version: ' + version, function (error) {
+        if (error) {
+            return cb(error);
+        }
+        git.push('origin', 'master', {args: '--tags'}, cb);
+    });
+
+    function getPackageJsonVersion () {
+        //We parse the json file instead of using require because require caches multiple calls so the version number won't be updated
+        return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
+    }
+});
+
+gulp.task('release', function (callback) {
+    runSequence(
+        'bump-patch-version',
+        'commit-changes',
+        'push-changes',
+        'create-new-tag',
+        function (error) {
+            if (error) {
+                console.log(error.message);
+            } else {
+                console.log('RELEASE FINISHED SUCCESSFULLY');
+            }
+            callback(error);
+        });
 });
