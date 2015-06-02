@@ -7,7 +7,7 @@
  *
  * @restrict A
  * */
-angular.module('ui.identicon')
+angular.module('ui.identicon', [])
     .directive('identicon', function () {
         return {
             restrict: 'E',
