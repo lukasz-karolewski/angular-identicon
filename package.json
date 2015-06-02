@@ -1,0 +1,41 @@
+{
+  "name": "angular-identicon",
+  "version": "0.1.0",
+  "description": "angular wrapper for github like identicons",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kether667/angular-identicon.git"
+  },
+  "keywords": [
+    "angular",
+    "identicon"
+  ],
+  "author": "lkarolewski@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kether667/angular-identicon/issues"
+  },
+  "homepage": "https://github.com/kether667/angular-identicon",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-bump": "^0.3.1",
+    "gulp-concat": "2.5.2",
+    "gulp-filter": "^2.0.2",
+    "gulp-git": "^1.2.4",
+    "gulp-gzip": "1.1.0",
+    "gulp-html2js": "0.2.0",
+    "gulp-jshint": "1.11.0",
+    "gulp-less": "3.0.3",
+    "gulp-ng-annotate": "1.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "1.5.2",
+    "gulp-sync": "0.1.4",
+    "gulp-tag-version": "^1.2.1",
+    "gulp-uglify": "1.2.0",
+    "jshint-stylish": "2.0.0"
+  }
+}
