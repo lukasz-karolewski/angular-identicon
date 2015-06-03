@@ -2,8 +2,7 @@
 <html ng-app="demo">
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <title>angular-identicon demo</title>
 </head>
@@ -17,6 +16,7 @@
                 <input type="text" class="form-control" id="name" ng-model="name"/>
             </div>
         </div>
+
         <div class="col-xs-6">
             <div class="form-group">
                 <label for="size">Size</label>
@@ -26,13 +26,14 @@
     </div>
 
     <div class="well">
-        <identicon email="name" size="{{size}}"></identicon>
+        <identicon email="name" size="123"></identicon>
     </div>
 </div>
 
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/identicon/pnglib.js"></script>
-<script src="bower_components/identicon/identicon.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+<script src="//rawgithub.com/stewartlord/identicon.js/master/pnglib.js"></script>
+<script src="//rawgithub.com/stewartlord/identicon.js/master/identicon.js"></script>
+
 <script src="../dist/angular-identicon.js"></script>
 <script src="app.js"></script>
 
