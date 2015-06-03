@@ -8,7 +8,7 @@
   "description": "angular wrapper for github like identicons",
   "main": "dist/angular-identicon.js",
   "dependencies": {
-    "identicon": "git@github.com:stewartlord/identicon.js.git"
+    "identicon": "*"
   },
   "moduleType": [
     "globals"
