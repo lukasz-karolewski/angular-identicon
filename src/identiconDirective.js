@@ -7,7 +7,7 @@
  *
  * @restrict A
  * */
-angular.module('ui.identicon', ['md5'])
+angular.module('ui.identicon', ['gdi2290.md5-service'])
     .directive('identicon', function () {
         return {
             restrict: 'E',
