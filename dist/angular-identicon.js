@@ -7,7 +7,7 @@
  *
  * @restrict A
  * */
-angular.module('ui.identicon', [])
+angular.module('ui.identicon', ['md5'])
     .directive('identicon', function () {
         return {
             restrict: 'E',
@@ -17,13 +17,13 @@ angular.module('ui.identicon', [])
                 size: '='
             },
             template: '<img width={{size}} height={{size}} ng-src="data:image/png;base64,{{data}}">',
-            controller: ["$scope", function ($scope) {
+            controller: ["$scope", "md5", function ($scope, md5) {
 
                 $scope.size = (typeof($scope.size) !== 'undefined' ? $scope.size : 24);
 
                 $scope.$watch('email', function (newVal) {
                     if (newVal) {
-                        $scope.data = new Identicon(window.btoa($scope.email), $scope.size).toString();
+                        $scope.data = new Identicon(md5.createHash(newVal || ''), $scope.size).toString();
                     }
                 });
             }]
