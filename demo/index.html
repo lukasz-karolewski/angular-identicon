@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="demo">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+
+    <title>angular-identicon demo</title>
 </head>
-<body>
-test
+<body ng-controller="demoCtrl">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" ng-model="name"/>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label for="size">Size</label>
+                <input type="text" class="form-control" id="size" ng-model="size"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="well">
+        <identicon email="name" size="{{size}}"></identicon>
+    </div>
+</div>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/identicon/pnglib.js"></script>
+<script src="bower_components/identicon/identicon.js"></script>
+<script src="../dist/angular-identicon.js"></script>
 <script src="app.js"></script>
+
 </body>
 </html>
