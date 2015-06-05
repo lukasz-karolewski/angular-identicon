@@ -10,31 +10,40 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-12">
+            <h1>angular-identicon</h1>
+
+
+            <p>github alike identicons, wrapper around <a href="https://github.com/stewartlord/identicon.js/tree/master">identicon.js</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-2">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" ng-model="name"/>
+                <label for="name">username/email/anything</label>
+                <input type="text" class="form-control" id="name" ng-model="username"/>
             </div>
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="size">Size</label>
-                <input type="text" class="form-control" id="size" ng-model="size"/>
+                <input type="number" min="10" max="300" step="10"  class="form-control" id="size" ng-model="size"/>
             </div>
         </div>
     </div>
 
-    <div class="well">
-        <identicon email="name" size="123"></identicon>
+    <div class="text-center">
+        <identicon username="username" size="size"></identicon>
     </div>
 </div>
-
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+
 <script src="//rawgithub.com/stewartlord/identicon.js/master/pnglib.js"></script>
 <script src="//rawgithub.com/stewartlord/identicon.js/master/identicon.js"></script>
 
 <script src="//rawgit.com/kether667/angular-identicon/master/dist/angular-identicon.js"></script>
+
 <script src="app.js"></script>
 
 </body>
