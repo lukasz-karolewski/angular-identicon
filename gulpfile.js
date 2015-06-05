@@ -42,7 +42,6 @@ gulp.task('test', function () {
 gulp.task('default', ['build', 'test']);
 
 //------------ publishing
-
 gulp.task('bump-patch-version', function () {
     return gulp.src(['./bower.json', './package.json'])
         .pipe(bump({type: "patch"}).on('error', gutil.log))
@@ -51,7 +50,7 @@ gulp.task('bump-patch-version', function () {
 
 gulp.task('commit-changes', function () {
     return gulp.src('.')
-        .pipe(git.commit('[release] Bumped version number', {args: '-a'}));
+        .pipe(git.commit('Bumped version number'));
 });
 
 gulp.task('push-changes', function (cb) {
