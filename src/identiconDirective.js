@@ -7,24 +7,21 @@
  *
  * @restrict A
  * */
-angular.module('ui.identicon', ['gdi2290.md5-service'])
+angular.module('ui.identicon', [])
     .directive('identicon', function () {
         return {
             restrict: 'E',
             replace: true,
             scope: {
-                email: '=',
+                username: '=',
                 size: '='
             },
             template: '<img width={{size}} height={{size}} ng-src="data:image/png;base64,{{data}}">',
             controller: function ($scope, md5) {
-
                 $scope.size = (typeof($scope.size) !== 'undefined' ? $scope.size : 24);
 
-                $scope.$watch('email', function (newVal) {
-                    if (newVal) {
-                        $scope.data = new Identicon(md5.createHash(newVal || ''), $scope.size).toString();
-                    }
+                $scope.$watchGroup(['username', 'size'], function (newVal) {
+                    $scope.data = new Identicon(md5.createHash($scope.username || ''), $scope.size).toString();
                 });
             }
         };
