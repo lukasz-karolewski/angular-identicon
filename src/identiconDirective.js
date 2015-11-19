@@ -14,14 +14,16 @@ angular.module('ui.identicon', [])
             replace: true,
             scope: {
                 username: '=',
-                size: '='
+                size: '=',
+                naturalSize: '='
             },
             template: '<img width={{size}} height={{size}} ng-src="data:image/png;base64,{{data}}">',
             controller: function ($scope, md5) {
                 $scope.size = (typeof($scope.size) !== 'undefined' ? $scope.size : 24);
+                $scope.naturalSize = (typeof($scope.naturalSize) !== 'undefined' ? $scope.naturalSize : 300);
 
                 $scope.$watchGroup(['username', 'size'], function (newVal) {
-                    $scope.data = new Identicon(md5.createHash($scope.username || ''), $scope.size).toString();
+                    $scope.data = new Identicon(md5.createHash($scope.username || ''), $scope.naturalSize).toString();
                 });
             }
         };
