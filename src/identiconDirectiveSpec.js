@@ -14,11 +14,11 @@ describe('Directive: ui.identicon', function () {
 
     /**
      * @description
-     * Ensures naturalSize calculation is correct based on provided size and
-     * no provided naturalSize.
+     * Ensures margin calculation is correct based on provided size and
+     * no provided marginPx.
      * */
-    it('should calculate a valid natural size', function() {
-        expect($scope.naturalSize).toBe(34);
+    it('should calculate a valid margin', function() {
+        expect($scope.margin).toBe(1);
     });
 
     /**

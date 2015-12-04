@@ -15,20 +15,40 @@ angular.module('ui.identicon', [])
             scope: {
                 username: '=',
                 size: '=',
-                naturalSize: '='
+                marginPx: '='
             },
             template: '<img width={{size}} height={{size}} ng-src="data:image/png;base64,{{data}}">',
             controller: function ($scope, md5) {
-                $scope.size = (typeof($scope.size) !== 'undefined' ? $scope.size : 24);
-                $scope.naturalSize = $scope.naturalSize;
-                if ((typeof($scope.naturalSize) === 'undefined')) {
-                    var n;
-                    for (n = 22; n < $scope.size; n+=12);
-                    $scope.naturalSize = ($scope.size < n - 5) ? n - 5 : n;
-                }
+				
+				function calculateMargin(size, marginPx) {
+					var NUM_COLUMNS = 5; // Identicons are a 5x5 grid
+					var MIN_CELL_SIZE = 20; // We don't want the margin to "overpower" the cell size
 
-                $scope.$watchGroup(['username', 'size'], function (newVal) {
-                    $scope.data = new Identicon(md5.createHash($scope.username || ''), $scope.naturalSize).toString();
+					// Users can pass in their own desired margin in pixels
+					if (typeof marginPx !== 'undefined') {
+						// convert their margin pixels into Identicon's expected percentage of size
+						return marginPx / size;
+					}
+					
+					// Calculate an acceptable margin
+					marginPx = (size % NUM_COLUMNS) / 2; // Any extra space can be margin space
+					
+					var cellSize = (size / NUM_COLUMNS);
+					
+					// For larger identicons with no extra space, make the margin 5.
+					if (marginPx === 0 && cellSize > MIN_CELL_SIZE) {
+						marginPx = 5;
+					}
+					
+					// convert the calculated margin pixels into Identicon's expected percentage of size
+					return marginPx / size;
+				}
+				
+                $scope.size = (typeof($scope.size) !== 'undefined' ? $scope.size : 24);
+                $scope.margin = calculateMargin($scope.size, $scope.marginPx);
+
+                $scope.$watchGroup(['username', 'size', 'marginPx'], function (newVal) {
+                    $scope.data = new Identicon(md5.createHash($scope.username || ''), $scope.size, $scope.margin).toString();
                 });
             }
         };
